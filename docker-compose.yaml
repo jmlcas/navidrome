@@ -2,20 +2,18 @@ services:
 
   navidrome:
     image: deluan/navidrome:latest
-    container_name: navi
+    container_name: navidrome
     restart: unless-stopped
     ports:
       - "8200:4533"
     environment:
-      - PUID=1000
+      - PUID=1000   # Saber el PUID/PGID con el comando "id $user"
       - PGID=1000
       - TZ=Europe/Madrid
-      - ND_SCANINTERVAL=1m
+      - ND_SCANSCHEDULE=1h
       - ND_LOGLEVEL=info
-      - ND_PORT=4533
-      - ND_TRANSCODINGCACHESIZE=100MB
       - ND_SESSIONTIMEOUT=24h
+      - ND_DEFAULTTHEME=Dark   
     volumes:
       - ./data:/data
       - ./music:/music:ro
-
